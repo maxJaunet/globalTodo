@@ -19,7 +19,7 @@ function App() {
   });
 
   const clickHandler = () => {
-    axios.post('http://localhost:5000/category', cat)
+    axios.post('http://localhost:5000/categories', cat)
   }
 
   const handleChange = (e) => {
@@ -33,6 +33,8 @@ function App() {
 
    return (
     <div className="App">
+
+    
       {categories.map((item, index) => {
         return (
           <div key={index}>
@@ -41,12 +43,19 @@ function App() {
           </div>
         )
       })}
+      <h2>Post Cats</h2>
       <form action="/" method="POST">
         <input type="text" value={cat.title} onChange={e => handleChange(e)} name="title"/>
         <input type="text" value={cat.desc}  onChange={e => handleChange(e)} name="desc"/>
         <button type="submit" onClick={e => clickHandler(e)}>add category</button>
       </form>
+
+
+
+      
+
     </div>
+
   );
 }
 

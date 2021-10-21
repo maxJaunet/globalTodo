@@ -15,7 +15,7 @@ app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.use('/postIt', postItRoutes);
-app.use('/category', categoryRoutes);
+app.use('/categories', categoryRoutes);
 
 
 // ====================================================
