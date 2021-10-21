@@ -1,12 +1,15 @@
 import {useEffect, useState} from 'react';
 import './App.css';
 import axios from 'axios';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import AllCategories from './components/Categories/AllCategories';
+import AllPosts from './components/Posts/AllPosts';
+import Home from './components/Home/Home';
 
 function App() {
 
   useEffect(() => {
-    axios.get('http://localhost:5000/category')
+    axios.get('http://localhost:5000/categories')
     .then((allCategories) => {
       setCategories(allCategories.data);
       console.log(allCategories)
@@ -14,44 +17,41 @@ function App() {
   }, []);
 
   const [categories, setCategories] = useState([]);
-  const [cat, setCat] = useState({
-    title: '',
-    desc: ''
-  });
-
-  const clickHandler = () => {
-    axios.post('http://localhost:5000/categories', cat)
-  }
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-		setCat((prevValue) => {
-			return {
-				...prevValue, [name]: value
-			}
-  })
-}
+  
 
    return (
     <div className="App">
       <Router>
+      
+      <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/categories">Categories</Link>
+            </li>
+            <li>
+              <Link to="/posts">Posts</Link>
+            </li>
+          </ul>
+        </nav>
+
         
+        <Switch>
+          <Route path="/categories">
+            <AllCategories categoryObject={categories} />
+          </Route>
+          <Route path="/posts">
+            <AllPosts />
+          </Route>
+          <Route exact path="/">
+            <Home />
+          </Route>
+        </Switch>
       </Router>
 
-      {categories.map((item, index) => {
-        return (
-          <div key={index}>
-            <h3>{item.title}</h3>
-            <p>{item.desc}</p>
-          </div>
-        )
-      })}
-      <h2>Post Cats</h2>
-      <form action="/" method="POST">
-        <input type="text" value={cat.title} onChange={e => handleChange(e)} name="title"/>
-        <input type="text" value={cat.desc}  onChange={e => handleChange(e)} name="desc"/>
-        <button type="submit" onClick={e => clickHandler(e)}>add category</button>
-      </form>
+      
 
 
 

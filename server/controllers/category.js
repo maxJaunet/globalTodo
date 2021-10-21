@@ -57,10 +57,11 @@ export const updateCategory = async (req, res) => {
 }
 
 export const deleteCategory = async (req, res) => {
-    const categoryTitle = req.params.catTitle;
+    const categoryId = req.params.catId;
     try {
-        const deletedCat = await Category.deleteOne({title: categoryTitle});
+        const deletedCat = await Category.deleteOne({_id: categoryId});
         res.status(200).json(deletedCat);
+        console.log('category deleted');
     } catch (error) {
         res.status(403).json({ message: error.message });
     }
