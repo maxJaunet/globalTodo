@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import './App.css';
 import axios from 'axios';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
 
@@ -33,8 +34,10 @@ function App() {
 
    return (
     <div className="App">
+      <Router>
+        
+      </Router>
 
-    
       {categories.map((item, index) => {
         return (
           <div key={index}>

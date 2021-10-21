@@ -2,7 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import postItRoutes from './routes/postItRoutes.js';
+import postItRoutes from './routes/postRoutes.js';
 import categoryRoutes from './routes/categoryRoutes.js';
 
 const CONNECTION_URL = process.env.MONGO_URL;

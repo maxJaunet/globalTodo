@@ -20,9 +20,7 @@ export const getAllCategories = async (req, res) => {
 }
 
 export const postNewCategory = (req, res) => {
-    console.log("router call works")
     const newCategory = new Category(req.body);
-    console.log(req.body)
     try {
         newCategory.save();
         res.status(201).json(newCategory);
@@ -62,7 +60,7 @@ export const deleteCategory = async (req, res) => {
     const categoryTitle = req.params.catTitle;
     try {
         const deletedCat = await Category.deleteOne({title: categoryTitle});
-        res.status(200).json(deleteCategory);
+        res.status(200).json(deletedCat);
     } catch (error) {
         res.status(403).json({ message: error.message });
     }
