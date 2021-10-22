@@ -1,7 +1,7 @@
 import Post from '../models/post.js';
 
 export const getSinglePost = async (req, res) => {
-    const postName = req.params.postTitle;
+    const postTitle = req.params.postTitle;
     try {
         const singlePost = await Post.findOne({title: postTitle});
         res.status(200).json(singlePost);
@@ -42,7 +42,7 @@ export const patchPost = async (req, res) => {
 }
 
 export const updatePost = async (req, res) => {
-    const postTitle = req.params.catTitle;
+    const postTitle = req.params.postTitle;
     try {
         const modifiedPost =  await Post.findOneAndUpdate({title: postTitle},
             {$set: {
@@ -57,9 +57,9 @@ export const updatePost = async (req, res) => {
 }
 
 export const deletePost = async (req, res) => {
-    const postTitle = req.params.postTitle;
+    const postId = req.params.postId;
     try {
-        const deletedPost = await Post.deleteOne({title: postTitle});
+        const deletedPost = await Post.deleteOne({_id: postId});
         res.status(200).json(deletedPost);
     } catch (error) {
         res.status(403).json({ message: error.message });
